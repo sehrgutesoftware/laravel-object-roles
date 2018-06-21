@@ -1,0 +1,40 @@
+{
+    "name": "sehrgut/laravel-object-roles",
+    "description": "Roles & Permissions for Laravel where roles can be held in regard to a database object",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Joseph Paul",
+            "email": "joseph@sehrgute.software"
+        }
+    ],
+    "require": {
+        "illuminate/database": "^5.6"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "SehrGut\\LaravelObjectRoles\\": "src/LaravelObjectRoles"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": [
+            "./vendor/bin/phpunit"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "SehrGut\\LaravelObjectRoles\\LaravelObjectRolesProvider"
+            ]
+        }
+    }
+}
