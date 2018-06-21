@@ -17,7 +17,7 @@ There are plenty of packages that add ACL functionalities to a Laravel applicati
     - `permission_role`
     - `role_user`
 
-## Usage
+## Getting Started
 ### 1. Install Package
 ```bash
 composer require sehrgut/laravel-object-roles
@@ -28,7 +28,7 @@ composer require sehrgut/laravel-object-roles
 php artisan migrate
 ```
 
-### 3. Use `HasRolesAndPermissions` trait on the `User` model
+### 3. Use `HasRolesAndPermissions` trait on the `User model
 ```php
 <?php
 
@@ -36,11 +36,44 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use SehrGut\LaravelObjectRoles\HasRolesAndPermissions;
+use SehrGut\LaravelObjectRoles\Models\Permission;
 
 class User extends Model
 {
     use HasRolesAndPermissions;
 }
+```
+
+## Documentation
+### Creating Roles & Permissions
+```php
+$permission = SehrGut\LaravelObjectRoles\Models\Permission::create([
+    'name' => 'posts.update',
+    'description' => 'The ability to update existing Post objects',
+]);
+$role = SehrGut\LaravelObjectRoles\Models\Role::create([
+    'name' => 'EDITOR',
+    'description' => 'A User who can manage content',
+]);
+```
+
+### Assigning Permissions to Roles
+```php
+$role->attachPermission('posts.update');
+// or:
+$role->attachPermission($permission);
+```
+
+### Assigning Roles to Users
+```php
+$user->assignGlobalRole('EDITOR');
+$user->assignObjectRole('EDITOR', $organisation);
+```
+
+### Checking Permissions
+```php
+$user->hasGlobalPermission('posts.update')
+$user->hasPermissionThrough('show_statistics', $organisation)
 ```
 
 ## License
