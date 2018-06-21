@@ -2,6 +2,17 @@
 
 > Roles & Permissions for Laravel where roles can be held in regard to a database object
 
+## Table of Contents
+- [Why?](#why)
+- [Disclaimer](#disclaimer)
+- [Getting Started](#getting-started)
+- [Documentation](#documentation)
+ - [Create Roles &amp; Permissions](#creating-roles--permissions)
+ - [Assign Permissions to Roles](#assigning-permissions-to-roles)
+ - [Assign Roles to Users](#assigning-roles-to-users)
+ - [Check Permissions](#checking-permissions)
+- [License](#license)
+
 ## Why?
 There are plenty of packages that add ACL functionalities to a Laravel application. Yet, none of the existing solutions seems to allow us to assign roles to users with respect to an object. We often come across a use case where we do not only need to define global roles, such as `TECH_ADMIN`, but also roles in regard to a database object, such as an `Organisation`, which has eg. `EDITOR` users that are granted certain permissions only on that specific `Organisation` and not on others.
 
@@ -45,7 +56,7 @@ class User extends Model
 ```
 
 ## Documentation
-### Creating Roles & Permissions
+### Create Roles & Permissions
 ```php
 $permission = SehrGut\LaravelObjectRoles\Models\Permission::create([
     'name' => 'posts.update',
@@ -57,20 +68,20 @@ $role = SehrGut\LaravelObjectRoles\Models\Role::create([
 ]);
 ```
 
-### Assigning Permissions to Roles
+### Assign Permissions to Roles
 ```php
 $role->attachPermission('posts.update');
 // or:
 $role->attachPermission($permission);
 ```
 
-### Assigning Roles to Users
+### Assign Roles to Users
 ```php
 $user->assignGlobalRole('EDITOR');
 $user->assignObjectRole('EDITOR', $organisation);
 ```
 
-### Checking Permissions
+### Check Permissions
 ```php
 $user->hasGlobalPermission('posts.update')
 $user->hasPermissionThrough('show_statistics', $organisation)
