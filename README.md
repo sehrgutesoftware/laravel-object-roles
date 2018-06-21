@@ -7,10 +7,10 @@
 - [Disclaimer](#disclaimer)
 - [Getting Started](#getting-started)
 - [Documentation](#documentation)
- - [Create Roles &amp; Permissions](#creating-roles--permissions)
- - [Assign Permissions to Roles](#assigning-permissions-to-roles)
- - [Assign Roles to Users](#assigning-roles-to-users)
- - [Check Permissions](#checking-permissions)
+    - [Create Roles &amp; Permissions](#creating-roles--permissions)
+    - [Assign Permissions to Roles](#assigning-permissions-to-roles)
+    - [Assign Roles to Users](#assigning-roles-to-users)
+    - [Check Permissions](#checking-permissions)
 - [License](#license)
 
 ## Why?
