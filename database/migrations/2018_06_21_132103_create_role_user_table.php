@@ -21,8 +21,8 @@ class CreateRoleUserTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
 
-            $table->string('object_type');
-            $table->integer('object_id')->unsigned();
+            $table->string('object_type')->nullable();
+            $table->integer('object_id')->unsigned()->nullable();
 
             $table->boolean('global')->default(false);
         });
