@@ -56,11 +56,15 @@ trait HasRolesAndPermissions
      * Determine whether the User has given Permission in regard to an Object.
      *
      * @param  string $permission
-     * @param  Illuminate\Database\Eloquent\Model $object
+     * @param  Illuminate\Database\Eloquent\Model|null $object
      * @return boolean
      */
-    public function hasPermissionThrough(string $permission, Model $object): bool
+    public function hasPermissionThrough(string $permission, ?Model $object = null): bool
     {
+        if (is_null($object)) {
+            return false;
+        }
+
         return $this->roles()
             ->whereHas('permissions', function ($builder) use ($permission) {
                 $builder->where('name', $permission);
