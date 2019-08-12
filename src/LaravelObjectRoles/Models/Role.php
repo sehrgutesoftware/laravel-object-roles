@@ -42,7 +42,7 @@ class Role extends Model
     public function attachPermission($permission): self
     {
         $permission = Permission::resolve($permission);
-        $this->permissions()->attach($permission);
+        $this->permissions()->syncWithoutDetaching([$permission->getKey()]);
 
         return $this;
     }
