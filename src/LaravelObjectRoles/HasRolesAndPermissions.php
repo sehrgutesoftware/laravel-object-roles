@@ -105,4 +105,28 @@ trait HasRolesAndPermissions
 
         return $this;
     }
+
+    /**
+     * Assign a role to this User with defaults.
+     *
+     * If default_global is true on the Role, the role will be assigned as global.
+     * Otherwise, if default_relation is defined, and the relation exists on
+     * the User object, the role is assigned in regard to that relation.
+     * 
+     * @param  SehrGut\LaravelObjectRoles\Models\Role|string $role
+     * @return $this
+     */
+    public function assignRoleWithDefaults($role): self
+    {
+        $role = Role::resolve($role);
+
+        if ($role->default_global) {
+            return $this->assignGlobalRole($role);
+        } elseif (
+            !is_null($role->default_relation)
+            and $this->{$role->default_relation} instanceof Model
+        ) {
+            return $this->assignObjectRole($role, $this->{$role->default_relation});
+        }
+    }
 }
